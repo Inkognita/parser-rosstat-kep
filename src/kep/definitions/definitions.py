@@ -36,7 +36,11 @@ QTR = [('GDP_bln_rub', 1999, {4: 1447}),
           
 MONTHLY = [('CPI_rog', 1999, {1: 108.4, 6: 101.9, 12: 101.3}),
            ('EXPORT_GOODS_bln_usd', 1999, {12: 9.7}),
-           ('IMPORT_GOODS_bln_usd', 1999, {12: 4.0})
+           ('IMPORT_GOODS_bln_usd', 1999, {12: 4.0}),
+           ('CORP_DEBT_bln_rub', 1999, {1: 2347.0}),
+           ('CORP_DEBT_OVERDUE_bln_rub', 1999, {1: 1241.1}),
+           ('CORP_DEBT_OVERDUE_SUPPLIERS_bln_rub', 1999, {1: 583.5}),
+           ('CORP_DEBT_OVERDUE_BUDGET_bln_rub', 1999, {1: 232.4})
            ]
 
 

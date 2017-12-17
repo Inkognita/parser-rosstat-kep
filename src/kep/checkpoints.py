@@ -80,11 +80,14 @@ WAGE_NOMINAL_rub                    1248.0
 WAGE_REAL_rog                         80.9
 WAGE_REAL_yoy                         60.7"""
 
-
 MONTHLY_STR="""
 year                                1999.0
 month                                  1.0
 AGROPROD_yoy                          96.5
+CORP_DEBT_OVERDUE_BUDGET_bln_rub     232.4
+CORP_DEBT_OVERDUE_SUPPLIERS_bln_rub  583.5
+CORP_DEBT_OVERDUE_bln_rub           1241.1
+CORP_DEBT_bln_rub                   2347.0
 CORP_RECEIVABLE_OVERDUE_bln_rub      772.0
 CORP_RECEIVABLE_bln_rub             1550.6
 CPI_ALCOHOL_rog                      109.7
