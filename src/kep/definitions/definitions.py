@@ -206,7 +206,24 @@ commands=[
          unit='bln_rub')]
 PARSING_DEFINITIONS.append(Def(commands, boundaries, reader='fiscal'))
 
-# no quarterly or annual data for this definition
+boundaries = [
+    dict(start='2.4.1. Кредиторская задолженность',
+         end='2.4.2. Дебиторская задолженность')]
+commands = [
+    dict(var='CORP_DEBT',
+         header='Кредиторская задолженность',
+         unit='bln_rub'),
+    dict(var='CORP_DEBT_OVERDUE',
+         header='в том числе просроченная',
+         unit='bln_rub'),
+    dict(var='CORP_DEBT_OVERDUE_SUPPLIERS',
+         header='Поставщикам, млрд.рублей',
+         unit='bln_rub'),
+    dict(var='CORP_DEBT_OVERDUE_BUDGET',
+         header='В бюджеты всех уровней',
+         unit='bln_rub'),]
+PARSING_DEFINITIONS.append(Def(commands, boundaries))
+
 boundaries = [
     dict(start='2.4.2. Дебиторская задолженность',
            end='2.5. Просроченная задолженность по заработной плате на начало месяца')]
@@ -222,6 +239,59 @@ commands=[
          )]
    
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
+
+""" TODO
+boundaries = [
+    dict(start='2.2. Сальдированный финансовый результат',
+         end='Убыточные организации')]
+commands = [
+    dict(var='NONFINANCIALS_PROFIT_MINING',
+         header='Добыча полезных ископаемых',
+         unit='bln_rub'),
+
+    dict(var='NONFINANCIALS_PR_MANUF',
+         header='Обрабатывающие производства',
+         unit='bln_rub'),
+    dict(var='NONFINANCIALS_PR_POWER_GAS_WATER',
+         header='Обеспечение электрической энергией, газом и паром; кондиционирование воздуха',
+         unit='bln_rub'),
+    dict(var='NONFINANCIALS_PROFIT_CONSTRUCTION',
+         header='Строительство',
+             unit='bln_rub'),
+    #dict(var='NONFINANCIALS_PROFIT_TRANS_COMM',
+    #     header='Транспорт и связь',
+    #     unit='bln_rub'),
+    dict(var='NONFINANCIALS_PROFIT_TRANS_STOR',
+         header='Транспортировка и хранение',
+         unit='bln_rub'),]
+
+PARSING_DEFINITIONS.append(Def(commands, boundaries))
+
+
+boundaries = [
+    dict(start='1.6.1. Инвестиции в основной капитал организаций',
+           end='1.7. Объем работ по виду деятельности Строительство'),
+    dict(start='1.7. Объем работ по виду деятельности Строительство',
+           end='1.8. Объем работ по виду деятельности Строительство')]
+commands=[
+    dict(var='I_EXSB_FUNDING_OWN_FUNDS',
+         header='собственные средства предприятий',
+         unit=['bln_rub']),
+    dict(var='I_EXSB_FUNDING_EXTERNAL_FUNDS',
+         header=['привлеченные средства'],
+         unit=['bln_rub']),
+    dict(var='I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET',
+         header='бюджетные средства',
+         unit=['bln_rub']),
+    dict(var='I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET_FEDERAL',
+         header='из федерального бюджета',
+         unit=['bln_rub']),
+    dict(var='I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET_SUBFEDERAL',
+         header='из бюджетов субъектов Российской Федерации',
+         unit=['bln_rub'])
+]
+PARSING_DEFINITIONS.append(Def(commands, boundaries))
+"""
 
 if __name__ == '__main__':
     from kep.vintage import Frame
