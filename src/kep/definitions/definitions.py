@@ -40,9 +40,13 @@ MONTHLY = [('CPI_rog', 1999, {1: 108.4, 6: 101.9, 12: 101.3}),
            ('CORP_DEBT_bln_rub', 1999, {1: 2347.0}),
            ('CORP_DEBT_OVERDUE_bln_rub', 1999, {1: 1241.1}),
            ('CORP_DEBT_OVERDUE_SUPPLIERS_bln_rub', 1999, {1: 583.5}),
-           ('CORP_DEBT_OVERDUE_BUDGET_bln_rub', 1999, {1: 232.4})
+           ('CORP_DEBT_OVERDUE_BUDGET_bln_rub', 1999, {1: 232.4}),
+           ('NONFINANCIALS_PROFIT_MINING', 2017, {1: 258752}),
+           ('NONFINANCIALS_PR_MANUF', 2017, {1: 109158}),
+           ('NONFINANCIALS_PR_POWER_GAS_WATER', 2017, {1: 94490}),
+           ('NONFINANCIALS_PROFIT_CONSTRUCTION', 2017, {1: 7878}),
+           ('NONFINANCIALS_PROFIT_TRANS_STOR', 2017, {1: 100190})
            ]
-
 
 # default definition - applies to all CSV file
 default_commands = [
@@ -244,7 +248,7 @@ commands=[
    
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
 
-""" TODO
+# TODO: It would be nice to be able to parse the string with the definition vintage.get_dataframes_from_string(text, parsing_definition)
 boundaries = [
     dict(start='2.2. Сальдированный финансовый результат',
          end='Убыточные организации')]
@@ -252,7 +256,6 @@ commands = [
     dict(var='NONFINANCIALS_PROFIT_MINING',
          header='Добыча полезных ископаемых',
          unit='bln_rub'),
-
     dict(var='NONFINANCIALS_PR_MANUF',
          header='Обрабатывающие производства',
          unit='bln_rub'),
@@ -262,16 +265,13 @@ commands = [
     dict(var='NONFINANCIALS_PROFIT_CONSTRUCTION',
          header='Строительство',
              unit='bln_rub'),
-    #dict(var='NONFINANCIALS_PROFIT_TRANS_COMM',
-    #     header='Транспорт и связь',
-    #     unit='bln_rub'),
     dict(var='NONFINANCIALS_PROFIT_TRANS_STOR',
          header='Транспортировка и хранение',
          unit='bln_rub'),]
 
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
 
-
+""" TODO
 boundaries = [
     dict(start='1.6.1. Инвестиции в основной капитал организаций',
            end='1.7. Объем работ по виду деятельности Строительство'),
@@ -311,6 +311,18 @@ if __name__ == '__main__':
        dict(name='GDP_bln_rub', date='1999-12', value=1447),
        dict(name='ZZZ_rog', date='1999-12', value=116.0)
        ]
+
+    MONTHLY = [
+       dict(name='CORP_DEBT_bln_rub', date='1999-1', value=2347.0),
+       dict(name='CORP_DEBT_OVERDUE_bln_rub', date='1999-1', value=1241.1),
+       dict(name='CORP_DEBT_OVERDUE_SUPPLIERS_bln_rub', date='1999-1', value=583.5),
+       dict(name='CORP_DEBT_OVERDUE_BUDGET_bln_rub', date='1999-1', value=232.4),
+       dict(name='NONFINANCIALS_PROFIT_MINING', date='1999-1', value=258752),
+       dict(name='NONFINANCIALS_PR_MANUF', date='1999-1', value=109158),
+       dict(name='NONFINANCIALS_PR_POWER_GAS_WATER', date='1999-1', value=94490),
+       dict(name='NONFINANCIALS_PROFIT_CONSTRUCTION', date='1999-1', value=7878),
+       dict(name='NONFINANCIALS_PROFIT_TRANS_STOR', date='1999-1', value=100190),
+    ]
     
     #TODO: add some monthly values
     
@@ -321,7 +333,10 @@ if __name__ == '__main__':
     
     q = frame.isin('q', QTR)
     assert q == [True, False] # CPI is not in default definition
-    
+
+    m = frame.isin('m', MONTHLY)
+    assert q == [True, True, True, True, True, True, True, True, True]
+
     dfa = frame.annual()
     dfq = frame.quarterly()
     dfm = frame.monthly()
