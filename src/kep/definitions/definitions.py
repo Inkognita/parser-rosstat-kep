@@ -10,12 +10,12 @@ from kep.csv2df.specification import Def
 
 #TODO: extend descriptions
 descriptions = dict(abbr='GDP', ru='Валовый внутренний продукт', en='')
- 
+
 
 
 ANNUAL = [
    ('GDP_bln_rub', 1999, 4823.0),
-   ('GDP_yoy', 1999, 106.4), 
+   ('GDP_yoy', 1999, 106.4),
    ('AGROPROD_yoy', 1999, 103.8),
 ]
 
@@ -28,12 +28,15 @@ ANNUAL = [
 #    'WAGE_NOMINAL_rub',             1523.0
 #    'WAGE_REAL_yoy',                  78.0
 
-
-
 QTR = [('GDP_bln_rub', 1999, {4: 1447}),
-       ('CPI_rog', 1999, {1: 116.0, 2: 107.3, 3: 105.6, 4: 103.9})
+       ('CPI_rog', 1999, {1: 116.0, 2: 107.3, 3: 105.6, 4: 103.9}),
+       ('I_EXSB_FUNDING_OWN_FUNDS', 1999, {1: 49.4, 2: 56.7, 3: 77.0, 4: 121.8}),
+       ('I_EXSB_FUNDING_EXTERNAL_FUNDS', 1999, {1: 33.2, 2: 49.7, 3: 76.4, 4: 117.9}),
+       ('I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET', 1999, {1: 11.6, 2: 19.9, 3: 28.8, 4: 38.9}),
+       ('I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET_FEDERAL', 1999, {1: 3.3, 2: 5.7, 3: 14.9, 4: 13.6}),
+       ('I_EXSB_FUNDING_EXTERNAL_FUNDS_BUDGET_SUBFEDERAL', 1999, {1: 6.0, 2: 12.2, 3: 13.9, 4: 23.8}),
        ]
-          
+
 MONTHLY = [('CPI_rog', 1999, {1: 108.4, 6: 101.9, 12: 101.3}),
            ('EXPORT_GOODS_bln_usd', 1999, {12: 9.7}),
            ('IMPORT_GOODS_bln_usd', 1999, {12: 4.0}),
@@ -64,27 +67,27 @@ default_commands = [
         var='AGROPROD',
         header=['Индекс производства продукции сельского хозяйства в хозяйствах всех категорий',
                 'Продукция сельского хозяйства в хозяйствах всех категорий'],
-        unit='yoy'), 
-    dict(          
-        var='WAGE_NOMINAL', 
+        unit='yoy'),
+    dict(
+        var='WAGE_NOMINAL',
         header=['Среднемесячная номинальная начисленная заработная плата работников организаций',
                 'Среднемесячная номинальная начисленная заработная плата одного работника'],
-        unit='rub'), 
-    dict(          
-        var='WAGE_REAL', 
+        unit='rub'),
+    dict(
+        var='WAGE_REAL',
         header=['Реальная начисленная заработная плата работников организаций',
                 'Реальная начисленная заработная плата одного работника'],
-        unit=['yoy', 'rog']), 
+        unit=['yoy', 'rog']),
     dict(
         var='TRANSPORT_FREIGHT',
         header='Коммерческий грузооборот транспорта',
         unit='bln_tkm'),
-    dict(        
-        var='UNEMPL', 
+    dict(
+        var='UNEMPL',
         header=['Уровень безработицы', 'Общая численность безработных'],
         unit='pct'),
     dict(
-        var='PPI', 
+        var='PPI',
         header=['Индексы цен производителей промышленных товаров'],
         unit='rog'),
 ]
@@ -98,13 +101,13 @@ boundaries = [
     dict(start='1.10. Внешнеторговый оборот – всего',
            end='1.10.1. Внешнеторговый оборот со странами дальнего зарубежья'),
     dict(start='1.10. Внешнеторговый оборот – всего',
-           end='1.10.1.Внешнеторговый оборот со странами дальнего зарубежья')]    
+           end='1.10.1.Внешнеторговый оборот со странами дальнего зарубежья')]
 commands=[
-    dict(        
+    dict(
         var='EXPORT_GOODS',
         header=['экспорт товаров – всего', 'Экспорт товаров'],
         unit='bln_usd'),
-    dict(        
+    dict(
         var='IMPORT_GOODS',
         header=['импорт товаров – всего',
                 'Импорт товаров'],
@@ -117,10 +120,10 @@ boundaries = [
     dict(start='1.7. Инвестиции в основной капитал',
            end='1.7.1. Инвестиции в основной капитал организаций')]
 commands=[
-    dict(        
+    dict(
         var='INVESTMENT',
         header=['Инвестиции в основной капитал'],
-        unit=['bln_rub', 'yoy', 'rog'])]    
+        unit=['bln_rub', 'yoy', 'rog'])]
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
 
 
@@ -132,12 +135,12 @@ commands=[
         var='CPI',
         header='Индекс потребительских цен',
         unit='rog'),
-    dict(            
+    dict(
         var='CPI_NONFOOD',
         header=['непродовольственные товары',
                  'непродовольст- венные товары'],
         unit='rog'),
-    dict(        
+    dict(
         var='CPI_FOOD',
         header='продукты питания',
         unit='rog'),
@@ -145,7 +148,7 @@ commands=[
         var='CPI_SERVICES',
         header='услуги',
         unit='rog'),
-    dict(        
+    dict(
         var='CPI_ALCOHOL',
         header='алкогольные напитки',
         unit='rog'),
@@ -185,7 +188,7 @@ commands=[
     dict(var='GOV_REVENUE_ACCUM_SUBFEDERAL',
          header='Консолидированные бюджеты субъектов Российской Федерации',
          unit='bln_rub')]
-PARSING_DEFINITIONS.append(Def(commands, boundaries, reader='fiscal'))    
+PARSING_DEFINITIONS.append(Def(commands, boundaries, reader='fiscal'))
 
 boundaries = [
     dict(start='2.1.2. Расходы (по данным Федерального казначейства)',
@@ -200,7 +203,7 @@ commands=[
     dict(var='GOV_EXPENSE_ACCUM_SUBFEDERAL',
          header='Консолидированные бюджеты субъектов Российской Федерации',
          unit='bln_rub')]
-PARSING_DEFINITIONS.append(Def(commands, boundaries, reader='fiscal')) 
+PARSING_DEFINITIONS.append(Def(commands, boundaries, reader='fiscal'))
 
 boundaries = [
     dict(start='2.1.3. Превышение доходов над расходами',
@@ -242,10 +245,10 @@ commands=[
     dict(var='CORP_RECEIVABLE_OVERDUE',
          header='в том числе просроченная',
          unit='bln_rub',
-         # LATER: incorporate a check value    
-         check = ('bln_rub', 'm', '2017-09',  2445.8)           
+         # LATER: incorporate a check value
+         check = ('bln_rub', 'm', '2017-09',  2445.8)
          )]
-   
+
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
 
 # TODO: It would be nice to be able to parse the string with the definition vintage.get_dataframes_from_string(text, parsing_definition)
@@ -271,7 +274,6 @@ commands = [
 
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
 
-""" TODO
 boundaries = [
     dict(start='1.6.1. Инвестиции в основной капитал организаций',
            end='1.7. Объем работ по виду деятельности Строительство'),
@@ -295,18 +297,17 @@ commands=[
          unit=['bln_rub'])
 ]
 PARSING_DEFINITIONS.append(Def(commands, boundaries))
-"""
 
 if __name__ == '__main__':
     from kep.vintage import Frame
-    
+
     ANNUAL = [
        dict(name='GDP_bln_rub', date='1999', value=4823.0),
-       dict(name='GDP_yoy', date='1999', value=106.4), 
+       dict(name='GDP_yoy', date='1999', value=106.4),
        dict(name='AGROPROD_yoy', date='1999', value=103.8),
        dict(name='ZZZ_abc', date='1999', value=-1),
     ]
-    
+
     QTR = [
        dict(name='GDP_bln_rub', date='1999-12', value=1447),
        dict(name='ZZZ_rog', date='1999-12', value=116.0)
@@ -323,14 +324,14 @@ if __name__ == '__main__':
        dict(name='NONFINANCIALS_PROFIT_CONSTRUCTION', date='1999-1', value=7878),
        dict(name='NONFINANCIALS_PROFIT_TRANS_STOR', date='1999-1', value=100190),
     ]
-    
+
     #TODO: add some monthly values
-    
+
     frame = Frame(2017, 10, Def(default_commands))
-    
+
     a = frame.isin('a', ANNUAL)
     assert a == [True, True, True, False]
-    
+
     q = frame.isin('q', QTR)
     assert q == [True, False] # CPI is not in default definition
 
